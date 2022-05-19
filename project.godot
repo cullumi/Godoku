@@ -1,0 +1,110 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Object",
+"class": "Axes",
+"language": "GDScript",
+"path": "res://utilities/axes.gd"
+}, {
+"base": "GridContainer",
+"class": "Board",
+"language": "GDScript",
+"path": "res://nodes/Board.gd"
+}, {
+"base": "MarginContainer",
+"class": "Box",
+"language": "GDScript",
+"path": "res://nodes/Box.gd"
+}, {
+"base": "Container",
+"class": "CircleContainer",
+"language": "GDScript",
+"path": "res://addons/control++/circle_container.gd"
+}, {
+"base": "Container",
+"class": "FixedGrid",
+"language": "GDScript",
+"path": "res://addons/control++/fixed_grid.gd"
+}, {
+"base": "Object",
+"class": "Generator",
+"language": "GDScript",
+"path": "res://SudokuGenerator.gd"
+}, {
+"base": "HBoxContainer",
+"class": "HBoxContainerPlus",
+"language": "GDScript",
+"path": "res://addons/control++/h_box_container++.gd"
+}, {
+"base": "ItemList",
+"class": "LetterBank",
+"language": "GDScript",
+"path": "res://nodes/LetterBank.gd"
+}, {
+"base": "Object",
+"class": "Make",
+"language": "GDScript",
+"path": "res://utilities/make.gd"
+}, {
+"base": "Object",
+"class": "Matrixes",
+"language": "GDScript",
+"path": "res://utilities/matrixes.gd"
+}, {
+"base": "Object",
+"class": "Solver",
+"language": "GDScript",
+"path": "res://SudokuSolver.gd"
+}, {
+"base": "VBoxContainer",
+"class": "VBoxContainerPlus",
+"language": "GDScript",
+"path": "res://addons/control++/v_box_container++.gd"
+}, {
+"base": "Container",
+"class": "ZBoxContainer",
+"language": "GDScript",
+"path": "res://nodes/ZBoxContainer.gd"
+} ]
+_global_script_class_icons={
+"Axes": "",
+"Board": "",
+"Box": "",
+"CircleContainer": "res://addons/control++/CircleContainer.svg",
+"FixedGrid": "res://addons/control++/FixedGrid.svg",
+"Generator": "",
+"HBoxContainerPlus": "",
+"LetterBank": "",
+"Make": "",
+"Matrixes": "",
+"Solver": "",
+"VBoxContainerPlus": "",
+"ZBoxContainer": ""
+}
+
+[application]
+
+config/name="Sudoku"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
