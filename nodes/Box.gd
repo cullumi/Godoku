@@ -7,7 +7,8 @@ signal selected
 export (Color) var predefined_color:Color = Color.darkgray
 export (Color) var filled_color:Color = Color.royalblue
 export (Color) var invalid_color:Color = Color.sienna
-export (DynamicFont) var font:DynamicFont
+export (Font) var filled_font:Font
+export (Font) var noted_font:Font
 
 var value_label:Label
 var note_label:Label
@@ -25,6 +26,8 @@ var value:int = 0 setget set_value
 var note:int = 0 setget set_note
 var content = 0 setget , get_content
 var notes:Array = [] setget set_notes
+var toggle_mode:bool = false setget set_toggle_mode
+var pressed:bool = false setget set_pressed
 
 func get_mode():
 	match status:
@@ -36,17 +39,25 @@ func get_content():
 		STATUS.NOTED: return notes.duplicate()
 		_: return value
 
+func set_toggle_mode(val):
+	toggle_mode = val
+	button.toggle_mode = val
+
+func set_pressed(val):
+	pressed = val
+	button.pressed = val
+
 func set_size_flags(node:Control, horizontal:int, vertical:int):
 	node.size_flags_horizontal = horizontal
 	node.size_flags_vertical = vertical
 
-func make_component(prop:String, type:GDScriptNativeClass):
+func make_component(prop:String, type:GDScriptNativeClass, extraInfo=null):
 	self[prop] = type.new()
 	if (type == Label):
 		self[prop].align = HALIGN_CENTER
 		self[prop].valign = VALIGN_CENTER
-		if (font != null):
-			self[prop].add_constant_override("font", font)
+		if (extraInfo != null and extraInfo is Font):
+			self[prop].add_font_override("font", extraInfo)
 	if (type != Button):
 		self[prop].mouse_filter = MOUSE_FILTER_IGNORE
 	else:
@@ -54,12 +65,13 @@ func make_component(prop:String, type:GDScriptNativeClass):
 	add_child(self[prop])
 	set_size_flags(self[prop], SIZE_EXPAND_FILL, SIZE_EXPAND_FILL)
 
-func _init(nfont:DynamicFont=font):
-	font = nfont
+func _init(nf_font:Font=filled_font, nn_font:Font=noted_font):
+	filled_font = nf_font
+	noted_font = nn_font
 	make_component("button", Button)
 	make_component("status_indicator", ColorRect)
-	make_component("note_label", Label)
-	make_component("value_label", Label)
+	make_component("note_label", Label, nn_font)
+	make_component("value_label", Label, nf_font)
 
 func set_visuals(vl_visible:bool, nl_visible:bool, si_visible:bool, si_color:Color):
 	value_label.visible = vl_visible
@@ -70,8 +82,12 @@ func set_visuals(vl_visible:bool, nl_visible:bool, si_visible:bool, si_color:Col
 
 func set_note_label(vals:Array):
 	var text:String = ""
+	var i:int = 0
 	for val in vals:
+		if i != 0:
+			text += "\n" if not (i % 3) else ""
 		text += " %d " % val
+		i += 1
 	note_label.text = text
 
 func set_value_label(val:int):

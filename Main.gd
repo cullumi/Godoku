@@ -10,17 +10,24 @@ onready var connect_sources:Array = [
 	$MarginContainer/MainColumn/BottomBar/Validate,
 	$MarginContainer/MainColumn/BottomBar/Notetaking,
 	$MarginContainer/MainColumn/BottomBar/Undo,
-	bank
+	bank, bank,
+	board, board,
 ]
 var connect_signals:Array = [
-	"pressed", "pressed", "pressed", "pressed", "pressed", "pressed", "selected"
+	"pressed", "pressed", "pressed", "pressed", "pressed", "pressed",
+	"selected", "unselected", "box_selected", "box_unselected",
 ]
 onready var connect_targets:Array = [
-	self, self, self, self, self, self, self
+	self, self, self, self, self, self,
+	self, self, self, self,
 ]
 var connect_methods:Array = [
-	"Back", "Customize", "Restart", "Validate", "Notetaking", "Undo", "set_number"
+	"Back", "Customize", "Restart", "Validate", "Notetaking", "Undo",
+	"Select_Number", "UnSelect_Number", "Select_Box", "UnSelect_Box",
 ]
+
+var paint_mode = false
+var tenkey_mode = false
 
 func _ready():
 	
@@ -55,5 +62,26 @@ func Notetaking():
 func Undo():
 	board.undo()
 
-func set_number(num:int):
+func UnSelect_Box():
+	tenkey_mode = false
+	board.set_box_toggle_modes(false)
+
+func Select_Box():
+	if paint_mode:
+		board.set_box()
+	elif not tenkey_mode:
+		tenkey_mode = true
+
+func UnSelect_Number():
+	print("Unselected")
+	paint_mode = false
+	board.set_box_toggle_modes(true)
+
+func Select_Number(num:int):
 	board.set_number(num)
+	if tenkey_mode:
+		board.set_box()
+		bank.deselect()
+	elif not paint_mode:
+		paint_mode = true
+		board.set_box_toggle_modes(false)

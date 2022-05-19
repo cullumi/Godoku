@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://nodes/Board.gd" type="Script" id=1]
 [ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fonts/kirifont/KirifontBig.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Matcher.gd" type="Script" id=7]
 [ext_resource path="res://fonts/kirifont/KirifontTitle.tres" type="DynamicFont" id=8]
+[ext_resource path="res://fonts/kirifont/KirifontSmall.tres" type="DynamicFont" id=9]
 
 [node name="Main" type="AspectRatioContainer"]
 anchor_right = 1.0
@@ -34,18 +35,18 @@ size_flags_vertical = 3
 custom_constants/separation = 30
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainColumn"]
-margin_left = 777.0
-margin_right = 1112.0
+margin_left = 772.0
+margin_right = 1117.0
 margin_bottom = 94.0
 size_flags_horizontal = 4
 
 [node name="Title" type="Label" parent="MarginContainer/MainColumn/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 328.0
+margin_right = 338.0
 margin_bottom = 87.0
 custom_fonts/font = ExtResource( 8 )
-text = "Sudoku"
+text = "Godoku"
 
 [node name="TopBar" type="HBoxContainer" parent="MarginContainer/MainColumn"]
 margin_top = 124.0
@@ -117,7 +118,8 @@ margin_left = 175.793
 margin_right = 891.793
 margin_bottom = 716.0
 script = ExtResource( 1 )
-font = ExtResource( 2 )
+filled_font = ExtResource( 6 )
+noted_font = ExtResource( 9 )
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
 margin_left = 1227.72

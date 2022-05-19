@@ -1,6 +1,6 @@
 extends Object
 
-class_name Generator
+class_name GodokuGenerator
 
 # == Sudoku Generator ==
 # Creating a sudoku board generator is quite easy.

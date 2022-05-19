@@ -41,4 +41,3 @@ static func print_mat(matrix:Array):
 	for row in matrix:
 		print(row)
 	print("}")
-	print("")

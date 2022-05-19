@@ -30,6 +30,7 @@ const values:Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 const notes:Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 const sets:Array = [values, notes]
 
+signal unselected
 signal selected(val)
 
 var last_selected:int = -1
@@ -83,10 +84,16 @@ func set_font(val):
 		add_font_override("font", font)
 	align()
 
+func deselect(index:int=last_selected):
+	if last_selected >= 0:
+		unselect(index)
+		last_selected = -1
+
 func item_selected(index:int):
 	if (last_selected == index):
 		unselect(index)
+		emit_signal("unselected")
 		last_selected = -1
 	else:
-		emit_signal("selected", sets[mode][letter_indexes.find(index)])
 		last_selected = index
+		emit_signal("selected", sets[mode][letter_indexes.find(index)])

@@ -35,9 +35,19 @@ _global_script_classes=[ {
 "path": "res://addons/control++/fixed_grid.gd"
 }, {
 "base": "Object",
-"class": "Generator",
+"class": "GodokuCollapse",
 "language": "GDScript",
-"path": "res://SudokuGenerator.gd"
+"path": "res://GodokuWFC.gd"
+}, {
+"base": "Object",
+"class": "GodokuGenerator",
+"language": "GDScript",
+"path": "res://GodokuGenerator.gd"
+}, {
+"base": "Object",
+"class": "GodokuReducer",
+"language": "GDScript",
+"path": "res://GodokuReducer.gd"
 }, {
 "base": "HBoxContainer",
 "class": "HBoxContainerPlus",
@@ -59,11 +69,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://utilities/matrixes.gd"
 }, {
-"base": "Object",
-"class": "Solver",
-"language": "GDScript",
-"path": "res://SudokuSolver.gd"
-}, {
 "base": "VBoxContainer",
 "class": "VBoxContainerPlus",
 "language": "GDScript",
@@ -80,12 +85,13 @@ _global_script_class_icons={
 "Box": "",
 "CircleContainer": "res://addons/control++/CircleContainer.svg",
 "FixedGrid": "res://addons/control++/FixedGrid.svg",
-"Generator": "",
+"GodokuCollapse": "",
+"GodokuGenerator": "",
+"GodokuReducer": "",
 "HBoxContainerPlus": "",
 "LetterBank": "",
 "Make": "",
 "Matrixes": "",
-"Solver": "",
 "VBoxContainerPlus": "",
 "ZBoxContainer": ""
 }
@@ -95,6 +101,10 @@ _global_script_class_icons={
 config/name="Sudoku"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [display]
 
