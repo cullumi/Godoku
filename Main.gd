@@ -63,17 +63,17 @@ func Undo():
 	board.undo()
 
 func UnSelect_Box():
-	tenkey_mode = false
-	board.set_box_toggle_modes(false)
-	board.clear_highlight()
+	if tenkey_mode:
+		tenkey_mode = false
+		board.set_box_toggle_modes(false)
+		board.clear_highlight()
 
 func Select_Box(empty:bool):
 	if paint_mode:
 		board.set_box()
 		board.match_to()
 	else:
-		if not tenkey_mode:
-			tenkey_mode = true
+		tenkey_mode = true
 		if not empty:
 			board.match_to()
 
