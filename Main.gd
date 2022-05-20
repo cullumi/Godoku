@@ -65,23 +65,32 @@ func Undo():
 func UnSelect_Box():
 	tenkey_mode = false
 	board.set_box_toggle_modes(false)
+	board.clear_highlight()
 
-func Select_Box():
+func Select_Box(empty:bool):
 	if paint_mode:
 		board.set_box()
-	elif not tenkey_mode:
-		tenkey_mode = true
+		board.match_to()
+	else:
+		if not tenkey_mode:
+			tenkey_mode = true
+		if not empty:
+			board.match_to()
 
 func UnSelect_Number():
 	print("Unselected")
-	paint_mode = false
-	board.set_box_toggle_modes(true)
+	if paint_mode:
+		paint_mode = false
+		board.set_box_toggle_modes(true)
+		board.clear_highlight()
 
 func Select_Number(num:int):
 	board.set_number(num)
 	if tenkey_mode:
 		board.set_box()
 		bank.deselect()
-	elif not paint_mode:
-		paint_mode = true
-		board.set_box_toggle_modes(false)
+	else:
+		if not paint_mode:
+			paint_mode = true
+			board.set_box_toggle_modes(false)
+		board.match_to()

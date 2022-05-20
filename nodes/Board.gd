@@ -57,6 +57,7 @@ func add_new_box() -> Box:
 	box.predefined_color = predefined_color
 	box.filled_color = filled_color
 	box.toggle_mode = true
+	box.clear_highlight()
 	add_child(box)
 	return box
 
@@ -95,6 +96,7 @@ func set_box_toggle_modes(val:bool):
 			board[y][x].toggle_mode = val
 
 func _on_box_selected(y, x):
+	var box = board[y][x]
 	if cur_coord != null:
 		if y == cur_coord.y and x == cur_coord.x:
 			cur_coord = null
@@ -102,10 +104,10 @@ func _on_box_selected(y, x):
 		else:
 			board[cur_coord.y][cur_coord.x].pressed = false
 			cur_coord = Vector2(x, y)
-			emit_signal("box_selected")
+			emit_signal("box_selected", box.empty())
 	else:
 		cur_coord = Vector2(x, y)
-		emit_signal("box_selected")
+		emit_signal("box_selected", box.empty())
 
 func generate():
 	GodokuGenerator.randomatize()
@@ -132,3 +134,14 @@ func validate():
 	for y in range(9):
 		for x in range(9):
 			board[y][x].validate(solution[y][x])
+
+func match_to(num:int=number):
+	if num != 0:
+		for y in range(9):
+			for x in range(9):
+				board[y][x].match_to(num)
+
+func clear_highlight():
+	for y in range(9):
+		for x in range(9):
+			board[y][x].clear_highlight()
