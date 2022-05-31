@@ -99,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godoku"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

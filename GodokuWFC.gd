@@ -4,22 +4,46 @@ class_name GodokuCollapse
 
 const boxCount = 9*9
 
-static func solve(source_board:Array, tries=1000) -> bool:
+static func solutions_same(sol1:Array, sol2:Array):
+	for y in range(sol1.size()):
+		for x in range(sol1.size()):
+			if sol1[y][x] != sol2[y][x]:
+				return false
+	return true
+
+static func one_solution(source_board:Array, tries=1000) -> bool:
 	var board:Array = source_board.duplicate(true)
+	var init = initialize_entropy(board)
+	if init != 0: return init > 0
+	var num_sols = 0
+	var fin_sol = null
+	for t in range(tries):
+		var sol = find_solution(board.duplicate(true))
+		if sol and fin_sol != null and solutions_same(fin_sol, sol):
+			return false
+	return true
+
+static func solve(source_board:Array, tries=1000):
+	var board:Array = source_board.duplicate(true)
+	var init = initialize_entropy(board)
+	if init != 0: return init > 0
+	return find_solution(board, tries)
+
+static func initialize_entropy(board) -> int:
 	var non_entropy = generate_entropy(board)
 	var rips:int
 	for coord in non_entropy:
 		rips = ripple(board, coord)
 		if rips < 0:
-			return false # Contradictory Board
+			return -1
 		elif rips == boxCount - non_entropy.size():
-			return true
-	return find_solution(board)
+			return 1
+	return 0
 
 static func find_solution(board:Array, tries=1000):
 	for i in range(tries):
 		var solution = solve_attempt(board)
-		if solution: return true
+		return solution
 	return false # Timed Out, Too Many Attempts
 
 static func entropies(board) -> Dictionary:
@@ -50,7 +74,7 @@ static func solve_attempt(source_board:Array):
 					if entropies[i].empty():
 						entropies.erase(i)
 				else: entropies = entropies(board)
-	return true # Solved Board
+	return board # Solved Board
 
 static func generate_entropy(board:Array) -> Array:
 	var non_entropy:Array = []

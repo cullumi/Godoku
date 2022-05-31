@@ -21,6 +21,7 @@ signal box_unselected
 signal box_selected
 
 func _ready():
+	randomize()
 	columns = 17
 	board = []
 	for y in range(17):

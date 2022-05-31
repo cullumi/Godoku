@@ -2,14 +2,14 @@ extends Object
 
 class_name GodokuReducer
 
-static func reduce(source_board:Array, tries=9999999999999999):
+static func reduce(source_board:Array, tries=25):
 	var board = source_board.duplicate(true)
 	var result
 	var y:int
 	var x:int
 	var val = 0
 	var filled = count_filled(board)
-	while (GodokuCollapse.solve(board, tries) and filled > 10):
+	while (GodokuCollapse.one_solution(board, tries) and filled > 17):
 		val = 0
 		while (val == 0):
 			y = randi() % 9

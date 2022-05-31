@@ -42,7 +42,8 @@ func _ready():
 		source.connect(csignal, target, method)
 
 func Back():
-	get_tree().quit()
+	get_tree().change_scene("res://MainMenu.tscn")
+#	get_tree().quit()
 
 func Customize():
 	pass
