@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Axes",
 "language": "GDScript",
-"path": "res://utilities/axes.gd"
+"path": "res://scripts/utilities/axes.gd"
 }, {
 "base": "GridContainer",
 "class": "Board",
 "language": "GDScript",
-"path": "res://nodes/Board.gd"
+"path": "res://scripts/nodes/Board.gd"
 }, {
 "base": "MarginContainer",
 "class": "Box",
 "language": "GDScript",
-"path": "res://nodes/Box.gd"
+"path": "res://scripts/nodes/Box.gd"
 }, {
 "base": "Container",
 "class": "CircleContainer",
@@ -37,17 +37,17 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "GodokuCollapse",
 "language": "GDScript",
-"path": "res://GodokuWFC.gd"
+"path": "res://scripts/godoku/GodokuWFC.gd"
 }, {
 "base": "Object",
 "class": "GodokuGenerator",
 "language": "GDScript",
-"path": "res://GodokuGenerator.gd"
+"path": "res://scripts/godoku/GodokuGenerator.gd"
 }, {
 "base": "Object",
 "class": "GodokuReducer",
 "language": "GDScript",
-"path": "res://GodokuReducer.gd"
+"path": "res://scripts/godoku/GodokuReducer.gd"
 }, {
 "base": "HBoxContainer",
 "class": "HBoxContainerPlus",
@@ -57,17 +57,17 @@ _global_script_classes=[ {
 "base": "ItemList",
 "class": "LetterBank",
 "language": "GDScript",
-"path": "res://nodes/LetterBank.gd"
+"path": "res://scripts/nodes/LetterBank.gd"
 }, {
 "base": "Object",
 "class": "Make",
 "language": "GDScript",
-"path": "res://utilities/make.gd"
+"path": "res://scripts/utilities/make.gd"
 }, {
 "base": "Object",
 "class": "Matrixes",
 "language": "GDScript",
-"path": "res://utilities/matrixes.gd"
+"path": "res://scripts/utilities/matrixes.gd"
 }, {
 "base": "VBoxContainer",
 "class": "VBoxContainerPlus",
@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Container",
 "class": "ZBoxContainer",
 "language": "GDScript",
-"path": "res://nodes/ZBoxContainer.gd"
+"path": "res://scripts/nodes/ZBoxContainer.gd"
 } ]
 _global_script_class_icons={
 "Axes": "",
@@ -99,12 +99,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Godoku"
-run/main_scene="res://MainMenu.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://scripts/singletons/Global.gd"
+Audio="*res://scripts/singletons/Audio.gd"
 
 [display]
 

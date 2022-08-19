@@ -1,0 +1,217 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/nodes/Board.gd" type="Script" id=1]
+[ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/nodes/ZBoxContainer.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=4]
+[ext_resource path="res://scripts/nodes/LetterBank.gd" type="Script" id=5]
+[ext_resource path="res://fonts/kirifont/KirifontBig.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scripts/nodes/Matcher.gd" type="Script" id=7]
+[ext_resource path="res://fonts/kirifont/KirifontTitle.tres" type="DynamicFont" id=8]
+[ext_resource path="res://fonts/kirifont/KirifontSmall.tres" type="DynamicFont" id=9]
+
+[node name="Main" type="AspectRatioContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+ratio = 1.78
+script = ExtResource( 4 )
+main_menu_path = "res://scenes/MainMenu.tscn"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 0.674133
+margin_right = 1920.0
+margin_bottom = 1079.33
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="MainColumn" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1905.0
+margin_bottom = 1063.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 30
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainColumn"]
+margin_left = 772.0
+margin_right = 1117.0
+margin_bottom = 94.0
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="MarginContainer/MainColumn/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 338.0
+margin_bottom = 87.0
+custom_fonts/font = ExtResource( 8 )
+text = "Godoku"
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/MainColumn"]
+margin_top = 124.0
+margin_right = 1890.0
+margin_bottom = 164.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Back" type="Button" parent="MarginContainer/MainColumn/TopBar"]
+margin_right = 920.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+
+[node name="Customize" type="Button" parent="MarginContainer/MainColumn/TopBar"]
+margin_left = 970.0
+margin_right = 1890.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+custom_fonts/font = ExtResource( 2 )
+text = "Customize"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MainColumn"]
+margin_top = 194.0
+margin_right = 1890.0
+margin_bottom = 198.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainColumn"]
+margin_top = 228.0
+margin_right = 1890.0
+margin_bottom = 944.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
+
+[node name="PlaySpace" type="Container" parent="MarginContainer/MainColumn/MarginContainer"]
+margin_left = 30.0
+margin_right = 1860.0
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
+margin_right = 160.138
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+custom_constants/separation = 100
+
+[node name="ARContainer2" type="AspectRatioContainer" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
+margin_left = 160.138
+margin_right = 1227.72
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace/ARContainer2"]
+margin_left = 175.793
+margin_right = 891.793
+margin_bottom = 716.0
+
+[node name="Board" type="GridContainer" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace/ARContainer2"]
+margin_left = 175.793
+margin_right = 891.793
+margin_bottom = 716.0
+script = ExtResource( 1 )
+filled_font = ExtResource( 6 )
+noted_font = ExtResource( 9 )
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
+margin_left = 1227.72
+margin_right = 1387.86
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+custom_constants/separation = 100
+
+[node name="ARContainer" type="AspectRatioContainer" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
+margin_left = 1387.86
+margin_right = 1669.86
+margin_bottom = 716.0
+rect_min_size = Vector2( 282, 50 )
+size_flags_vertical = 3
+ratio = 0.45
+script = ExtResource( 7 )
+target_paths = [ NodePath("LetterBank") ]
+match_rect_min_size = true
+
+[node name="LetterBank" type="ItemList" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace/ARContainer"]
+margin_top = 44.6667
+margin_right = 282.0
+margin_bottom = 671.333
+rect_min_size = Vector2( 282, 50 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 6 )
+items = [ "   ", null, false, "   ", null, false, "   ", null, false, " 1 ", null, false, " 2 ", null, false, " 3 ", null, false, "   ", null, false, "   ", null, false, "   ", null, false, " 4 ", null, false, " 5 ", null, false, " 6 ", null, false, "   ", null, false, "   ", null, false, "   ", null, false, " 7 ", null, false, " 8 ", null, false, " 9 ", null, false, "   ", null, false, "   ", null, false, "   ", null, false, "   ", null, false, " X ", null, false, "   ", null, false, "   ", null, false, "   ", null, false, "   ", null, false ]
+allow_reselect = true
+max_columns = 3
+fixed_column_width = 80
+script = ExtResource( 5 )
+font = ExtResource( 6 )
+
+[node name="VSeparator3" type="VSeparator" parent="MarginContainer/MainColumn/MarginContainer/PlaySpace"]
+margin_left = 1669.86
+margin_right = 1830.0
+margin_bottom = 716.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+custom_constants/separation = 100
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/MainColumn"]
+margin_top = 974.0
+margin_right = 1890.0
+margin_bottom = 978.0
+
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/MainColumn"]
+margin_top = 1008.0
+margin_right = 1890.0
+margin_bottom = 1048.0
+size_flags_vertical = 0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Restart" type="Button" parent="MarginContainer/MainColumn/BottomBar"]
+margin_right = 435.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Restart"
+
+[node name="Validate" type="Button" parent="MarginContainer/MainColumn/BottomBar"]
+margin_left = 485.0
+margin_right = 920.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Validate"
+
+[node name="Notetaking" type="Button" parent="MarginContainer/MainColumn/BottomBar"]
+margin_left = 970.0
+margin_right = 1405.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Notetaking"
+
+[node name="Undo" type="Button" parent="MarginContainer/MainColumn/BottomBar"]
+margin_left = 1455.0
+margin_right = 1890.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 7
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Undo"
